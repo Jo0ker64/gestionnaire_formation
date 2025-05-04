@@ -1,0 +1,59 @@
+# Existant
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/ dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+# —————————————————————————————————
+# AJOUTER
+# —————————————————————————————————
+
+# 1) Fichiers de configuration sensibles
+application.properties
+
+
+# 2) Logs et temporaires
+*.log
+logs/
+*.tmp
+*.temp
+
+# 3) Fichiers de base locale (H2, SQLite…)
+*.db
+*.mv.db
+/data/
+
+# 4) Rapports, coverage, Docker
+jacoco.exec
+coverage/
+docker-compose.override.yml
+.env
