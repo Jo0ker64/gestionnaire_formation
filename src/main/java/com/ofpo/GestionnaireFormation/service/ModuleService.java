@@ -31,12 +31,11 @@ public class ModuleService {
     }
 
     @Transactional
-    public Module update(Long id, Module moduleDetails) {
+    public Module update(Long id, Module details) {
         Module m = findById(id);
-        m.setTitre(moduleDetails.getTitre());
-        m.setDescription(moduleDetails.getDescription());
-        m.setFormation(moduleDetails.getFormation());
-        m.setSequences(moduleDetails.getSequences());
+        m.setLibelle(details.getLibelle());
+        m.setFormations(details.getFormations());
+        m.setSequences(details.getSequences());
         return moduleRepository.save(m);
     }
 

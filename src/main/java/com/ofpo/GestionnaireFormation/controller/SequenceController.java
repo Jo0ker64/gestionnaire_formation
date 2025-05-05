@@ -28,14 +28,17 @@ public class SequenceController {
     }
 
     @PostMapping("/create")
-    public Sequence create(@RequestBody Sequence sequence) {
-        return sequenceService.create(sequence);
+    public ResponseEntity<Sequence> create(@RequestBody Sequence sequence) {
+        Sequence saved = sequenceService.create(sequence);
+        return ResponseEntity.ok(saved);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Sequence> update(
-            @PathVariable Long id, @RequestBody Sequence sequence) {
-        return ResponseEntity.ok(sequenceService.update(id, sequence));
+            @PathVariable Long id,
+            @RequestBody Sequence sequence) {
+        Sequence updated = sequenceService.update(id, sequence);
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")

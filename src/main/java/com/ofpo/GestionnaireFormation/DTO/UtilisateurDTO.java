@@ -16,6 +16,7 @@ public class UtilisateurDTO {
     private String codePostal;
     private String ville;
     private String motDePasse;
+    private Boolean statut;
     private String roles; // affichage simple "Admin, Formateur" par exemple
 
     public UtilisateurDTO(Utilisateur utilisateur) {
@@ -28,6 +29,7 @@ public class UtilisateurDTO {
         this.adressePostal = utilisateur.getAdressePostal();
         this.codePostal = utilisateur.getCodePostal();
         this.ville = utilisateur.getVille();
+        this.statut = utilisateur.getStatut();
         this.roles = utilisateur.getRoles().stream()
                 .map(role -> role.getNom())
                 .collect(Collectors.joining(", "));
@@ -114,6 +116,10 @@ public class UtilisateurDTO {
 
     public String getVille() {
         return ville;
+    }
+
+    public Boolean getStatut() {
+        return statut;
     }
 
     public String getMotDePasse() {

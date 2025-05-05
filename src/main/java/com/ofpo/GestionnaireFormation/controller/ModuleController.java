@@ -28,14 +28,17 @@ public class ModuleController {
     }
 
     @PostMapping("/create")
-    public Module create(@RequestBody Module module) {
-        return moduleService.create(module);
+    public ResponseEntity<Module> create(@RequestBody Module module) {
+        Module saved = moduleService.create(module);
+        return ResponseEntity.ok(saved);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Module> update(
-            @PathVariable Long id, @RequestBody Module module) {
-        return ResponseEntity.ok(moduleService.update(id, module));
+            @PathVariable Long id,
+            @RequestBody Module module) {
+        Module updated = moduleService.update(id, module);
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")

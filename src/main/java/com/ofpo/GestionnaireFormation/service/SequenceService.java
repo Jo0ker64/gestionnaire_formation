@@ -31,11 +31,10 @@ public class SequenceService {
     }
 
     @Transactional
-    public Sequence update(Long id, Sequence sequenceDetails) {
+    public Sequence update(Long id, Sequence details) {
         Sequence s = findById(id);
-        s.setTitre(sequenceDetails.getTitre());
-        s.setContenu(sequenceDetails.getContenu());
-        s.setModule(sequenceDetails.getModule());
+        s.setLibelle(details.getLibelle());
+        s.setModules(details.getModules());
         return sequenceRepository.save(s);
     }
 

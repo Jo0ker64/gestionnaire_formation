@@ -31,13 +31,16 @@ public class FormationService {
     }
 
     @Transactional
-    public Formation update(Long id, Formation formationDetails) {
+    public Formation update(Long id, Formation details) {
         Formation f = findById(id);
-        f.setTitre(formationDetails.getTitre());
-        f.setDescription(formationDetails.getDescription());
-        f.setDuree(formationDetails.getDuree());
-        // si tu veux remplacer les modules en même temps :
-        f.setModules(formationDetails.getModules());
+        f.setLibelle(details.getLibelle());
+        f.setNumeroOffre(details.getNumeroOffre());
+        f.setDateDebut(details.getDateDebut());
+        f.setDateFin(details.getDateFin());
+        f.setDateDebutPe(details.getDateDebutPe());
+        f.setDateFinPe(details.getDateFinPe());
+        f.setStatut(details.getStatut());
+        f.setModules(details.getModules());
         return formationRepository.save(f);
     }
 

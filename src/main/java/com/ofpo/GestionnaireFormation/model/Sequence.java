@@ -1,31 +1,45 @@
 package com.ofpo.GestionnaireFormation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "sequence")
+@Table(name = "sequence")   // ou "sequence_" si besoin
 public class Sequence {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String titre;
-    private String contenu;
+    private String libelle;
 
-    @ManyToOne
-    @JoinColumn(name = "module_id")
-    private Module module;
+    /** On cache l’inverse pour éviter la récursion Module→Sequence→Module… */
+    @ManyToMany(mappedBy = "sequences", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<Module> modules = new ArrayList<>();
 
-    // Getters & Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    // — Getters & Setters —
 
-    public String getTitre() { return titre; }
-    public void setTitre(String titre) { this.titre = titre; }
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getContenu() { return contenu; }
-    public void setContenu(String contenu) { this.contenu = contenu; }
+    public String getLibelle() {
+        return libelle;
+    }
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
 
-    public Module getModule() { return module; }
-    public void setModule(Module module) { this.module = module; }
+    public List<Module> getModules() {
+        return modules;
+    }
+    public void setModules(List<Module> modules) {
+        this.modules = modules;
+    }
 }

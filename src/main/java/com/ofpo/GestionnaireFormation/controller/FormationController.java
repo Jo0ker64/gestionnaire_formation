@@ -28,14 +28,17 @@ public class FormationController {
     }
 
     @PostMapping("/create")
-    public Formation create(@RequestBody Formation formation) {
-        return formationService.create(formation);
+    public ResponseEntity<Formation> create(@RequestBody Formation formation) {
+        Formation saved = formationService.create(formation);
+        return ResponseEntity.ok(saved);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Formation> update(
-            @PathVariable Long id, @RequestBody Formation formation) {
-        return ResponseEntity.ok(formationService.update(id, formation));
+            @PathVariable Long id,
+            @RequestBody Formation formation) {
+        Formation updated = formationService.update(id, formation);
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
