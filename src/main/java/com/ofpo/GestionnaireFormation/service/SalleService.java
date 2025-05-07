@@ -48,4 +48,5 @@ public class SalleService {
     public void delete(Long id) {
         salleRepo.deleteById(id);
     }
+
 }

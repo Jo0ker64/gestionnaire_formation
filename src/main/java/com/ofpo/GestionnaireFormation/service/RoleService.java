@@ -31,7 +31,7 @@ public class RoleService {
     public Role update(Long id, Role roleDetails) {
         Role role = roleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Role non trouvé avec l'id : " + id));
-        role.setNom(roleDetails.getNom());
+        role.setLibelle(roleDetails.getLibelle());
         return roleRepository.save(role);
     }
 

@@ -33,7 +33,7 @@ public class SequenceController {
         return ResponseEntity.ok(saved);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Sequence> update(
             @PathVariable Long id,
             @RequestBody Sequence sequence) {
@@ -41,7 +41,7 @@ public class SequenceController {
         return ResponseEntity.ok(updated);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         sequenceService.delete(id);
         return ResponseEntity.noContent().build();

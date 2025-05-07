@@ -56,8 +56,7 @@
     - utilisateur et formation
 - Vérifier les erreurs actuelles et les corriger
 - inclure une sécurité
-- faire des vues 
-- 
+- faire des vues
 
 
 

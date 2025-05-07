@@ -30,7 +30,7 @@ public class Formation {
     @Column(name = "date_fin_pe")
     private LocalDate dateFinPe;
 
-    private Integer statut;
+    private Boolean statut;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -62,8 +62,8 @@ public class Formation {
     public LocalDate getDateFinPe() { return dateFinPe; }
     public void setDateFinPe(LocalDate dateFinPe) { this.dateFinPe = dateFinPe; }
 
-    public Integer getStatut() { return statut; }
-    public void setStatut(Integer statut) { this.statut = statut; }
+    public Boolean getStatut() { return statut; }
+    public void setStatut(Boolean statut) { this.statut = statut; }
 
     public List<Module> getModules() { return modules; }
     public void setModules(List<Module> modules) { this.modules = modules; }

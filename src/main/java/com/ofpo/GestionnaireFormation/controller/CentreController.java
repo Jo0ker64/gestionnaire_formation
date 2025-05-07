@@ -27,12 +27,12 @@ public class CentreController {
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @PostMapping("/")
+    @PostMapping("/create")
     public ResponseEntity<Centre> create(@RequestBody Centre c) {
         return ResponseEntity.ok(service.create(c));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Centre> update(
             @PathVariable Long id,
             @RequestBody Centre c
@@ -40,7 +40,7 @@ public class CentreController {
         return ResponseEntity.ok(service.update(id, c));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();

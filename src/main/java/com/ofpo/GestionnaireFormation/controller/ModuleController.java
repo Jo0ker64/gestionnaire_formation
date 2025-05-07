@@ -33,7 +33,7 @@ public class ModuleController {
         return ResponseEntity.ok(saved);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Module> update(
             @PathVariable Long id,
             @RequestBody Module module) {
@@ -41,7 +41,7 @@ public class ModuleController {
         return ResponseEntity.ok(updated);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         moduleService.delete(id);
         return ResponseEntity.noContent().build();

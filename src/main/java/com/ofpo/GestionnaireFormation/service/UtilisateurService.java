@@ -4,6 +4,7 @@ import com.ofpo.GestionnaireFormation.model.Role;            // ⇨ CORRECTION :
 import com.ofpo.GestionnaireFormation.model.Utilisateur;
 import com.ofpo.GestionnaireFormation.repository.RoleRepository;      // ⇨ CORRECTION : import du repository Role
 import com.ofpo.GestionnaireFormation.repository.UtilisateurRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;      // ⇨ CORRECTION : annotation transactionnelle
 
@@ -86,4 +87,11 @@ public class UtilisateurService {
         utilisateur.setStatut(false);
         return utilisateurRepository.save(utilisateur);
     }
+
+    @Transactional
+    public Utilisateur findById(Long id) {
+        return utilisateurRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Utilisateur non trouvé avec l'ID : " + id));
+    }
+
 }

@@ -29,14 +29,64 @@ public class UtilisateurDTO {
         this.adressePostal = utilisateur.getAdressePostal();
         this.codePostal = utilisateur.getCodePostal();
         this.ville = utilisateur.getVille();
+        this.motDePasse = utilisateur.getMotDePasse();
         this.statut = utilisateur.getStatut();
         this.roles = utilisateur.getRoles().stream()
-                .map(role -> role.getNom())
+                .map(role -> role.getLibelle())         // <-- on utilise getLibelle()
                 .collect(Collectors.joining(", "));
     }
 
-    // Getters et Setters
+    // Getters
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getMatricule() {
+        return matricule;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public String getAdresseMail() {
+        return adresseMail;
+    }
+
+    public String getAdressePostal() {
+        return adressePostal;
+    }
+
+    public String getCodePostal() {
+        return codePostal;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public String getMotDePasse() {
+        return motDePasse;
+    }
+
+    public Boolean getStatut() {
+        return statut;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    // Setters
 
     public void setId(Long id) {
         this.id = id;
@@ -78,55 +128,11 @@ public class UtilisateurDTO {
         this.motDePasse = motDePasse;
     }
 
+    public void setStatut(Boolean statut) {
+        this.statut = statut;
+    }
+
     public void setRoles(String roles) {
         this.roles = roles;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getMatricule() {
-        return matricule;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public String getAdresseMail() {
-        return adresseMail;
-    }
-
-    public String getAdressePostal() {
-        return adressePostal;
-    }
-
-    public String getCodePostal() {
-        return codePostal;
-    }
-
-    public String getVille() {
-        return ville;
-    }
-
-    public Boolean getStatut() {
-        return statut;
-    }
-
-    public String getMotDePasse() {
-        return motDePasse;
-    }
-
-    public String getRoles() {
-        return roles;
     }
 }

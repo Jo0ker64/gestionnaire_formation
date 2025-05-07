@@ -33,7 +33,7 @@ public class FormationController {
         return ResponseEntity.ok(saved);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Formation> update(
             @PathVariable Long id,
             @RequestBody Formation formation) {
@@ -41,7 +41,7 @@ public class FormationController {
         return ResponseEntity.ok(updated);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         formationService.delete(id);
         return ResponseEntity.noContent().build();

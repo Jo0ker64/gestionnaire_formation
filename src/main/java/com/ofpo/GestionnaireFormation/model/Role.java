@@ -5,27 +5,30 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "role")
 public class Role {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String libelle;
+    private Boolean statut;
 
-    // Getters et Setters
-    public Long getId() {
-        return id;
+    // **Le constructeur vide est indispensable pour Jackson**
+    public Role() {}
+
+    // Si tu veux, tu peux aussi avoir un constructeur utile :
+    public Role(String libelle, Boolean statut) {
+        this.libelle  = libelle;
+        this.statut   = statut;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // … puis tes getters & setters …
 
-    public String getNom() {
-        return libelle;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setNom(String nom) {
-        this.libelle = nom;
-    }
+    public String getLibelle() { return libelle; }
+    public void setLibelle(String libelle) { this.libelle = libelle; }
+
+    public Boolean getStatut() { return statut; }
+    public void setStatut(Boolean statut) { this.statut = statut; }
 }

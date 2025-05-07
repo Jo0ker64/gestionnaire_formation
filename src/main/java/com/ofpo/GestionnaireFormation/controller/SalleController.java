@@ -32,7 +32,7 @@ public class SalleController {
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @PostMapping("/centre/{centreId}")
+    @PostMapping("/create/centre/{centreId}")
     public ResponseEntity<Salle> create(
             @PathVariable Long centreId,
             @RequestBody Salle s
@@ -40,7 +40,7 @@ public class SalleController {
         return ResponseEntity.ok(service.create(centreId, s));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Salle> update(
             @PathVariable Long id,
             @RequestBody Salle s
@@ -48,7 +48,7 @@ public class SalleController {
         return ResponseEntity.ok(service.update(id, s));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
