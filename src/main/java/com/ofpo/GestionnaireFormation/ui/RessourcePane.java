@@ -50,22 +50,19 @@ public class RessourcePane extends VBox {
         table.getColumns().addAll(colId, colLib, colType);
         table.setItems(fetchRessources());
         table.getSelectionModel().selectedItemProperty()
-                .addListener((o, ov, nv) -> loadForm(nv));
+                .addListener((obs, old, nv) -> loadForm(nv));
 
-        // --- 2. Boutons Nouveau / Supprimer ---
-        Button btnNew = new Button("Nouveau");
-        btnNew.setOnAction(e -> table.getSelectionModel().clearSelection());
-
+        // --- 2. Bouton Supprimer ---
         Button btnDel = new Button("Supprimer");
         btnDel.setOnAction(e -> {
             RessourceDTO sel = table.getSelectionModel().getSelectedItem();
             if (sel != null) {
-                rest.delete(baseUrl + "/" + sel.getId());
+                rest.delete(baseUrl + "/delete/" + sel.getId());
                 table.setItems(fetchRessources());
             }
         });
 
-        HBox hbButtons = new HBox(5, btnNew, btnDel);
+        HBox hbButtons = new HBox(5, btnDel);
 
         // --- 3. Formulaire de saisie / modification ---
         GridPane form = new GridPane();
@@ -147,7 +144,7 @@ public class RessourcePane extends VBox {
         if (sel == null) {
             rest.postForObject(baseUrl + "/create", dto, RessourceDTO.class);
         } else {
-            rest.put(baseUrl + "/" + dto.getId(), dto);
+            rest.put(baseUrl + "/update/" + dto.getId(), dto);
         }
         table.setItems(fetchRessources());
     }

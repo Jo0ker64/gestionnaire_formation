@@ -26,7 +26,7 @@ public class SequencePane extends VBox {
 
         table.getColumns().addAll(colId, colLib);
         table.setItems(fetchAll());
-        table.getSelectionModel().selectedItemProperty().addListener((o,ov,nv)->{
+        table.getSelectionModel().selectedItemProperty().addListener((obs,old,nv)->{
             if(nv!=null) {
                 tfLib.setText(nv.getLibelle());
             }

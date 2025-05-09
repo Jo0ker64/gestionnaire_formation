@@ -38,22 +38,21 @@ public class ModulePane extends VBox {
         table.setItems(fetchModules());
 
         // Lors d’une sélection : remplir le formulaire
-        table.getSelectionModel().selectedItemProperty().addListener((o, ov, nv) -> loadForm(nv));
+        table.getSelectionModel().selectedItemProperty()
+                .addListener((obs, old, nv) -> loadForm(nv));
 
-        // --- 2. Boutons Nouveau/Supprimer ---
-        Button btnNew = new Button("Nouveau");
-        btnNew.setOnAction(e -> table.getSelectionModel().clearSelection());
-
+        // --- 2. Bouton Supprimer ---
         Button btnDel = new Button("Supprimer");
         btnDel.setOnAction(e -> {
             ModuleDTO sel = table.getSelectionModel().getSelectedItem();
             if (sel != null) {
-                rest.delete(baseUrl + "/" + sel.getId());
+                // DELETE /modules/delete/{id}
+                rest.delete(baseUrl + "/delete/" + sel.getId());
                 table.setItems(fetchModules());
             }
         });
 
-        HBox hbButtons = new HBox(5, btnNew, btnDel);
+        HBox hbButtons = new HBox(5, btnDel);
 
         // --- 3. Formulaire de saisie ---
         GridPane form = new GridPane();
@@ -82,6 +81,7 @@ public class ModulePane extends VBox {
     /** Récupère la liste des modules depuis l’API */
     private ObservableList<ModuleDTO> fetchModules() {
         try {
+            // GET /modules/
             ModuleDTO[] arr = rest.getForObject(baseUrl + "/", ModuleDTO[].class);
             return FXCollections.observableArrayList(arr);
         } catch (ResourceAccessException e) {
@@ -106,9 +106,11 @@ public class ModulePane extends VBox {
         dto.setLibelle(tfLibelle.getText());
 
         if (sel == null) {
+            // POST /modules/create
             rest.postForObject(baseUrl + "/create", dto, ModuleDTO.class);
         } else {
-            rest.put(baseUrl + "/" + dto.getId(), dto);
+            // PUT /modules/update/{id}
+            rest.put(baseUrl + "/update/" + dto.getId(), dto);
         }
         table.setItems(fetchModules());
     }

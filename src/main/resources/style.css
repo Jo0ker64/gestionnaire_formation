@@ -1,0 +1,65 @@
+/* ============================================= */
+/*            STYLE GÉNÉRAL DES TABLES           */
+/* ============================================= */
+
+/* Fond de la TableView et bordure extérieure */
+.table-view {
+    -fx-background-color: transparent;   /* Fond transparent pour laisser transparaître la scène */
+    -fx-border-color: #3e753e;            /* Couleur de bordure verte foncée */
+    -fx-border-width: 2px;               /* Épaisseur de la bordure */
+}
+
+/* ============================================= */
+/*         STYLE DES EN-TÊTES DE COLONNES        */
+/* ============================================= */
+
+/* Fond dégradé de la barre d'en-tête */
+.table-view .column-header-background {
+    -fx-background-color:
+            linear-gradient(
+                    to bottom,
+                    #6fa8dc,    /* Bleu clair en haut */
+                    #3d85c6     /* Bleu moyen en bas */
+            );
+}
+
+/* Texte et police des intitulés de colonnes */
+.table-view .column-header,
+.table-view .column-header .label {
+    -fx-text-fill: #c27676;  /* Couleur rouge doux pour le texte */
+    -fx-font-weight: bold;   /* Texte en gras */
+}
+
+/* ============================================= */
+/*             LIGNES ALTERNÉES                  */
+/* ============================================= */
+
+/* Même lignes (indices pairs) */
+.table-row-cell:filled:even {
+    -fx-background-color: #c4c4c4;  /* Gris clair */
+}
+
+/* Lignes impaires */
+.table-row-cell:filled:odd {
+    -fx-background-color: #a6a6a6;  /* Gris moyen */
+}
+
+/* ============================================= */
+/*               LIGNE SÉLECTIONNÉE               */
+/* ============================================= */
+
+/* Couleur de fond quand une ligne est sélectionnée */
+.table-row-cell:selected {
+    -fx-background-color: #b6d7a6;  /* Vert pâle */
+}
+
+/* ============================================= */
+/*                STYLE DES CELLULES              */
+/* ============================================= */
+
+/* Padding et bordure interne des cellules */
+.table-cell {
+    -fx-padding: 8px;                    /* Espacement interne */
+    -fx-border-color: lightgray;        /* Ligne de séparation grise claire */
+    -fx-border-width: 0 0 1px 0;         /* Bordure seulement en bas : 1px */
+}

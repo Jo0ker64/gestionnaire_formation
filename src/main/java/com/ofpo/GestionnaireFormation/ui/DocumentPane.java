@@ -44,20 +44,24 @@ public class DocumentPane extends VBox {
         table.setItems(fetchDocuments());
 
         // Au clic sur une ligne, charger le formulaire
-        table.getSelectionModel().selectedItemProperty().addListener((obs, old, sel) -> loadForm(sel));
+        table.getSelectionModel().
+                selectedItemProperty()
+                .addListener((
+                        obs,
+                        old,
+                        nv) ->
+                        loadForm(nv));
 
-        // --- B. Boutons Nouveau / Supprimer ---
-        Button btnAdd = new Button("Nouveau");
+        // --- B. Boutons  Supprimer ---
         Button btnDel = new Button("Supprimer");
-        btnAdd.setOnAction(e -> table.getSelectionModel().clearSelection());
         btnDel.setOnAction(e -> {
             DocumentDTO d = table.getSelectionModel().getSelectedItem();
             if (d != null) {
-                rest.delete(baseUrl + "/" + d.getId());
+                rest.delete(baseUrl + "/delete/" + d.getId());
                 table.setItems(fetchDocuments());
             }
         });
-        HBox hbBtns = new HBox(5, btnAdd, btnDel);
+        HBox hbBtns = new HBox(5, btnDel);
 
         // --- C. Formulaire ---
         GridPane form = new GridPane();
@@ -104,15 +108,12 @@ public class DocumentPane extends VBox {
         DocumentDTO d = table.getSelectionModel().getSelectedItem();
         boolean isNew = (d == null);
         if (isNew) d = new DocumentDTO();
-
         d.setLibelle(tfLibelle.getText());
         d.setDateCreation(dpCreation.getValue());
-
-
         if (isNew) {
             rest.postForObject(baseUrl + "/create", d, DocumentDTO.class);
         } else {
-            rest.put(baseUrl + "/" + d.getId(), d);
+            rest.put(baseUrl + "/update/" + d.getId(), d);
         }
 
         table.setItems(fetchDocuments());

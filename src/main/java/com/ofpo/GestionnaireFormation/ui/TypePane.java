@@ -7,52 +7,44 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 public class TypePane extends VBox {
-    // Client HTTP pour appeler l'API REST
     private final RestTemplate rest = new RestTemplate();
     private final String baseUrl = "http://localhost:8080/types";
 
-    // TableView pour afficher les types
     private final TableView<TypeDTO> table = new TableView<>();
-
-    // Champs du formulaire
     private final TextField tfLibelle = new TextField();
 
     public TypePane() {
-        // --- 1. Configuration des colonnes ---
+        // 1. Colonnes
         TableColumn<TypeDTO, Long> colId = new TableColumn<>("ID");
         colId.setCellValueFactory(c ->
                 new ReadOnlyObjectWrapper<>(c.getValue().getId())
         );
-
         TableColumn<TypeDTO, String> colLib = new TableColumn<>("Libellé");
         colLib.setCellValueFactory(c ->
                 new ReadOnlyObjectWrapper<>(c.getValue().getLibelle())
         );
-
         table.getColumns().addAll(colId, colLib);
         table.setItems(fetchTypes());
         table.getSelectionModel().selectedItemProperty()
-                .addListener((obs, oldV, newV) -> loadForm(newV));
+                .addListener((obs, old, nv) -> loadForm(nv));
 
-        // --- 2. Boutons Nouveau / Supprimer ---
-        Button btnNew = new Button("Nouveau");
-        btnNew.setOnAction(e -> table.getSelectionModel().clearSelection());
+        // 2. Bouton Supprimer
 
         Button btnDel = new Button("Supprimer");
         btnDel.setOnAction(e -> {
             TypeDTO sel = table.getSelectionModel().getSelectedItem();
             if (sel != null) {
-                rest.delete(baseUrl + "/" + sel.getId()); // Suppression de l'élément DELETE
+                rest.delete(baseUrl + "/delete/" + sel.getId());
                 table.setItems(fetchTypes());
             }
         });
+        HBox hbButtons = new HBox(5, btnDel);
 
-        HBox hbButtons = new HBox(5, btnNew, btnDel);
-
-        // --- 3. Formulaire de saisie / modification ---
+        // 3. Formulaire
         GridPane form = new GridPane();
         form.setHgap(10);
         form.setVgap(8);
@@ -60,14 +52,13 @@ public class TypePane extends VBox {
 
         Button btnSave = new Button("Enregistrer");
         btnSave.setOnAction(e -> saveOrUpdate());
-
         HBox hbSave = new HBox(btnSave);
         hbSave.setPadding(new Insets(5, 0, 0, 0));
 
-        // --- 4. Assemblage de la vue ---
-        this.setSpacing(10);
-        this.setPadding(new Insets(15));
-        this.getChildren().addAll(
+        // 4. Assemblage
+        setSpacing(10);
+        setPadding(new Insets(15));
+        getChildren().addAll(
                 new Label("Types de Ressource"),
                 table,
                 hbButtons,
@@ -77,35 +68,31 @@ public class TypePane extends VBox {
         );
     }
 
-    /** Récupère tous les types depuis l'API */
     private ObservableList<TypeDTO> fetchTypes() {
-        TypeDTO[] arr = rest.getForObject(baseUrl + "/", TypeDTO[].class);
-        return FXCollections.observableArrayList(arr);
-    }
-
-    /** Charge ou vide le formulaire selon la sélection */
-    private void loadForm(TypeDTO t) {
-        if (t == null) {
-            tfLibelle.clear();
-        } else {
-            tfLibelle.setText(t.getLibelle());
+        try {
+            TypeDTO[] arr = rest.getForObject(baseUrl + "/", TypeDTO[].class);
+            return FXCollections.observableArrayList(arr);
+        } catch (ResourceAccessException e) {
+            // journalise l’erreur et renvoie une liste vide
+            System.err.println("Impossible de joindre l’API /types : " + e.getMessage());
+            return FXCollections.observableArrayList();
         }
     }
 
-    /** Envoie POST pour création ou PUT pour mise à jour, puis recharge la table */
+    private void loadForm(TypeDTO t) {
+        tfLibelle.setText(t == null ? "" : t.getLibelle());
+    }
+
     private void saveOrUpdate() {
         TypeDTO sel = table.getSelectionModel().getSelectedItem();
         TypeDTO dto = (sel == null) ? new TypeDTO() : sel;
-
         dto.setLibelle(tfLibelle.getText());
 
         if (sel == null) {
-            // POST pour créer un nouveau type CREATE
             rest.postForObject(baseUrl + "/create", dto, TypeDTO.class);
         } else {
-            rest.put(baseUrl + "/" + dto.getId(), dto);
+            rest.put(baseUrl + "/update/" + dto.getId(), dto);
         }
-
         table.setItems(fetchTypes());
     }
 }

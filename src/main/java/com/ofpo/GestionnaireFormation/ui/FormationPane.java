@@ -80,28 +80,22 @@ public class FormationPane extends VBox {
         // Lorsque l'utilisateur sélectionne une ligne, remplir le formulaire
         table.getSelectionModel()
                 .selectedItemProperty()
-                .addListener((o, ov, nv) ->
+                .addListener((obs, old, nv) ->
                         loadForm(nv));
 
-        // --- 2. Boutons Nouveau et Supprimer ---
-        Button btnAdd = new Button("Nouveau");
+        // --- 2. Bouton Supprimer ---
         Button btnDel = new Button("Supprimer");
-
-        // Nouveau = vider la sélection pour créer une nouvelle formation
-        btnAdd.setOnAction(e ->
-                table.getSelectionModel().clearSelection()
-        );
 
         // Supprimer = appeler DELETE puis rafraîchir la liste
         btnDel.setOnAction(e -> {
             FormationDTO f = table.getSelectionModel().getSelectedItem();
             if (f != null) {
-                rest.delete(baseUrl + "/" + f.getId());
+                rest.delete(baseUrl + "/delete/" + f.getId());
                 table.setItems(fetchFormations());
             }
         });
 
-        HBox hbBtns = new HBox(5, btnAdd, btnDel);
+        HBox hbBtns = new HBox(5, btnDel);
 
         // --- 3. Formulaire de saisie / modification ---
         GridPane form = new GridPane();
@@ -197,7 +191,7 @@ public class FormationPane extends VBox {
             );
         } else {
             rest.put(
-                    baseUrl + "/" + f.getId(),
+                    baseUrl + "/update/" + f.getId(),
                     f
             );
         }

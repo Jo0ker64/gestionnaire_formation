@@ -30,6 +30,12 @@ public class Inscription {
         this.id           = new InscriptionKey(u.getId(), f.getId());
     }
 
+    public Inscription(InscriptionKey inscriptionKey, Utilisateur u, Formation f) {
+        this.id           = inscriptionKey;
+        this.utilisateur  = u;
+        this.formation    = f;
+    }
+
     // getters
     public Utilisateur getUtilisateur() { return utilisateur; }
     public Formation   getFormation()   { return formation; }

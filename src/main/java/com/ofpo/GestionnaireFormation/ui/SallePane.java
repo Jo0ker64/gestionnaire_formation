@@ -28,7 +28,7 @@ public class SallePane extends VBox {
 
         table.getColumns().addAll(colId, colLib, colC);
         table.setItems(fetchAll());
-        table.getSelectionModel().selectedItemProperty().addListener((o,ov,nv)->{
+        table.getSelectionModel().selectedItemProperty().addListener((obs,old,nv)->{
             if(nv!=null) {
                 tfLib.setText(nv.getLibelle());
                 tfCentre.setText(nv.getCentreId().toString());

@@ -24,13 +24,17 @@ public class RoleService {
                 .orElseThrow(() -> new RuntimeException("Role non trouvé avec l'id : " + id));
     }
 
+    public Role findByLibelle(String libelle) {
+        return roleRepository.findByLibelle(libelle)
+                .orElseThrow(() -> new RuntimeException("Role non trouvé avec le libellé : " + libelle));
+    }
+
     public Role create(Role role) {
         return roleRepository.save(role);
     }
 
     public Role update(Long id, Role roleDetails) {
-        Role role = roleRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Role non trouvé avec l'id : " + id));
+        Role role = findById(id);
         role.setLibelle(roleDetails.getLibelle());
         return roleRepository.save(role);
     }
