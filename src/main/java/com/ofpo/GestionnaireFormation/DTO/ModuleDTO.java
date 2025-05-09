@@ -11,6 +11,7 @@ public class ModuleDTO {
         this.libelle = libelle;
     }
 
+    // getters, setters
     public Long getId() {
         return id;
     }

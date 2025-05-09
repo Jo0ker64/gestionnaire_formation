@@ -47,16 +47,32 @@
 - **Génération de PDF** (iText ou IronPDF) et envoi de questionnaires
 
 ## 6. Reste à faire
-- Ressource
-- Type
-- Document
-- table de liaison entre :
-    - formation et ressource
-    - formation et document
-    - utilisateur et formation
-- Vérifier les erreurs actuelles et les corriger
-- inclure une sécurité
-- faire des vues
+### Ajouts et améliorations / DevOps
+- ajouter des tests
+- ajouter des logs ('
+- ajouter un front :
+    -   interface graphique (Angular, React, Vue, JavaFX, etc.)
+- ajouter un docker :
+    -   empaqueter ton appli dans un conteneur pour la rendre portable (docker-compose, dockerfile, docker swarm, kubernetes, etc.)
+- ajouter un CI/CD :
+  - automatiser les tests, les builds et les déploiements (ex : GitHub Actions, GitLab CI). 
+  CI = intégration continue / CD = déploiement continu
+- ajouter un swagger :
+  - documenter ton API REST (ex : SpringDoc, Swagger UI)
+- ajouter un cache :
+  - améliorer les performances de ton appli (ex : Redis, Memcached)
+- ajouter un CDN :
+  - améliorer la vitesse de chargement de ton appli (ex : Cloudflare, AWS CloudFront)
+- ajouter un WAF :
+  - protéger ton appli contre les attaques (ex : AWS WAF, Cloudflare WAF)
+
+### Ajouts et améliorations / Sécurité
+- ajouter un SSO ou SAML ou OAuth2 ou OpenID Connect :
+  - authentification unique pour plusieurs applications (ex : Google, Facebook, etc.)
+- ajouter un JWT 
+  - authentification par token (ex : JSON Web Token)
+
+
 
 
 

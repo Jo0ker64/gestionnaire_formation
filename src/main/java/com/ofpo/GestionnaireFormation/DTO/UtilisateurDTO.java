@@ -1,7 +1,7 @@
 package com.ofpo.GestionnaireFormation.DTO;
 
 import com.ofpo.GestionnaireFormation.model.Utilisateur;
-
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class UtilisateurDTO {
@@ -17,7 +17,7 @@ public class UtilisateurDTO {
     private String ville;
     private String motDePasse;
     private Boolean statut;
-    private String roles; // affichage simple "Admin, Formateur" par exemple
+    private List<String> roles; // liste des libellés de rôles
 
     public UtilisateurDTO(Utilisateur utilisateur) {
         this.id = utilisateur.getId();
@@ -32,107 +32,37 @@ public class UtilisateurDTO {
         this.motDePasse = utilisateur.getMotDePasse();
         this.statut = utilisateur.getStatut();
         this.roles = utilisateur.getRoles().stream()
-                .map(role -> role.getLibelle())         // <-- on utilise getLibelle()
-                .collect(Collectors.joining(", "));
+                .map(role -> role.getLibelle())
+                .collect(Collectors.toList());
     }
+
+    public UtilisateurDTO() {}
 
     // Getters
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getMatricule() {
-        return matricule;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public String getAdresseMail() {
-        return adresseMail;
-    }
-
-    public String getAdressePostal() {
-        return adressePostal;
-    }
-
-    public String getCodePostal() {
-        return codePostal;
-    }
-
-    public String getVille() {
-        return ville;
-    }
-
-    public String getMotDePasse() {
-        return motDePasse;
-    }
-
-    public Boolean getStatut() {
-        return statut;
-    }
-
-    public String getRoles() {
-        return roles;
-    }
+    public Long getId() { return id; }
+    public String getMatricule() { return matricule; }
+    public String getAvatar() { return avatar; }
+    public String getNom() { return nom; }
+    public String getPrenom() { return prenom; }
+    public String getAdresseMail() { return adresseMail; }
+    public String getAdressePostal() { return adressePostal; }
+    public String getCodePostal() { return codePostal; }
+    public String getVille() { return ville; }
+    public String getMotDePasse() { return motDePasse; }
+    public Boolean getStatut() { return statut; }
+    public List<String> getRoles() { return roles; }
 
     // Setters
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setMatricule(String matricule) {
-        this.matricule = matricule;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public void setAdresseMail(String adresseMail) {
-        this.adresseMail = adresseMail;
-    }
-
-    public void setAdressePostal(String adressePostal) {
-        this.adressePostal = adressePostal;
-    }
-
-    public void setCodePostal(String codePostal) {
-        this.codePostal = codePostal;
-    }
-
-    public void setVille(String ville) {
-        this.ville = ville;
-    }
-
-    public void setMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
-    }
-
-    public void setStatut(Boolean statut) {
-        this.statut = statut;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles;
-    }
+    public void setId(Long id) { this.id = id; }
+    public void setMatricule(String matricule) { this.matricule = matricule; }
+    public void setAvatar(String avatar) { this.avatar = avatar; }
+    public void setNom(String nom) { this.nom = nom; }
+    public void setPrenom(String prenom) { this.prenom = prenom; }
+    public void setAdresseMail(String adresseMail) { this.adresseMail = adresseMail; }
+    public void setAdressePostal(String adressePostal) { this.adressePostal = adressePostal; }
+    public void setCodePostal(String codePostal) { this.codePostal = codePostal; }
+    public void setVille(String ville) { this.ville = ville; }
+    public void setMotDePasse(String motDePasse) { this.motDePasse = motDePasse; }
+    public void setStatut(Boolean statut) { this.statut = statut; }
+    public void setRoles(List<String> roles) { this.roles = roles; }
 }

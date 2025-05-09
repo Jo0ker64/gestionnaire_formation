@@ -1,13 +1,17 @@
+// Package et imports
+
 package com.ofpo.GestionnaireFormation.DTO;
 
 import java.time.LocalDate;
 
+/**
+ * DocumentDTO est un objet de transfert de données (DTO) qui représente un document.
+ * Il contient des informations sur le document, y compris son identifiant, son libellé et sa date de création.
+ */
 public class DocumentDTO {
     private Long id;
     private String libelle;
     private LocalDate dateCreation;
-    private LocalDate dateModification;
-
 
     // constructeurs, getters, setters
     public Long getId() {
@@ -27,12 +31,6 @@ public class DocumentDTO {
     }
     public void setDateCreation(LocalDate dateCreation) {
         this.dateCreation = dateCreation;
-    }
-    public LocalDate getDateModification() {
-        return dateModification;
-    }
-    public void setDateModification(LocalDate dateModification) {
-        this.dateModification = dateModification;
     }
 
 }
